@@ -1,0 +1,1 @@
+int** read_matriz_from_file(const char* filename, int* size);
