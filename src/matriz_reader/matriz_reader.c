@@ -5,7 +5,7 @@
 int** read_matriz_from_file(const char* filename, int* size) {
     FILE* file = fopen(filename, "r");
     if (!file) {
-        perror("Error opening file");
+        perror("Não achou o arquivo da matriz");
         return NULL;
     }
 
