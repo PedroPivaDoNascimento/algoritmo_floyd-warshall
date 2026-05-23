@@ -32,7 +32,7 @@ make run
 
 ## ⚙️ Como alterar a matriz
 
-Como padrão eu encaminhei um arquivo matriz.txt visando testar a aplicação. Portanto caso queria testar uma matriz diferente, basta seguir o mesmo formato do arquivo exemplo. Onde **a primeira linha terá que ter o tamanho de linhas e colunas da matriz (semore vamos considerar que será uma matriz quadrada)** e abaixo dessa linha conterá a sua matriz.
+Como padrão eu encaminhei um arquivo matriz.txt visando testar a aplicação. Portanto caso queria testar uma matriz diferente, basta seguir o mesmo formato do arquivo exemplo. Onde **a primeira linha terá que ter o tamanho de linhas e colunas da matriz (sempre vamos considerar que será uma matriz quadrada)** e abaixo dessa linha conterá a sua matriz.
 
 ## 🤝 Contribuir
 
