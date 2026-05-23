@@ -6,8 +6,9 @@ typedef struct {
     int size;
 } Matriz;
 
+Matriz* create_matriz(int size);
 Matriz* fill_matriz_from_file();
-void print_matriz(Matriz* matriz);
-Matriz* create_warshall_matriz(Matriz* original);
+void create_warshall_matriz(Matriz* original);
+void create_floyd_warshall_matriz(Matriz* original);
 
 #endif // MATRIZ_H

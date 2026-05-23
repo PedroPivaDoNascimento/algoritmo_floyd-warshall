@@ -4,11 +4,7 @@
 
 int** read_matriz_from_file(const char* filename, int* size) {
     FILE* file = fopen(filename, "r");
-    if (!file) {
-        perror("Não achou o arquivo da matriz");
-        return NULL;
-    }
-
+  
     fscanf(file, "%d", size);
     int** matriz = (int**)malloc(*size * sizeof(int*));
     for (int i = 0; i < *size; i++) {

@@ -1,9 +1,58 @@
-all:
-	gcc -c src/controller/controller.c -I ./include -o obj/controller.o
-	gcc -c src/matriz_reader/matriz_handler.c -I ./include -o obj/matriz_handler.o
+# Variáveis de compilação
+CC = gcc
+CFLAGS = -Wall -Wextra -I./src/matriz -I./src/matriz_reader -I./src/view -I./src/controller -I./src
+
+# Pastas do projeto
+SRC_DIR = src
+OBJ_DIR = obj
+BIN_DIR = bin
+
+# Nome do executável final
+TARGET = $(BIN_DIR)/floyd-warshall
+
+OBJS = $(OBJ_DIR)/matriz_reader/matriz_reader.o \
+       $(OBJ_DIR)/matriz/matriz.o \
+       $(OBJ_DIR)/view/view.o \
+       $(OBJ_DIR)/controller/controller.o \
+       $(OBJ_DIR)/main.o
+
+# Regra padrão (compila o executável)
+all: $(TARGET)
+
+# Regra para linkar os objetos e criar o executável final
+$(TARGET): $(OBJS)
+	@mkdir -p $(BIN_DIR)
+	$(CC) $(OBJS) -o $(TARGET)
+
+# Regra específica para o main.c que está na raiz da pasta src
+$(OBJ_DIR)/main.o: $(SRC_DIR)/main.c
+	@mkdir -p $(OBJ_DIR)
+	$(CC) $(CFLAGS) -c $(SRC_DIR)/main.c -o $(OBJ_DIR)/main.o
+
+# Regras para os subdiretórios
+$(OBJ_DIR)/matriz_reader/matriz_reader.o: $(SRC_DIR)/matriz_reader/matriz_reader.c
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJ_DIR)/matriz/matriz.o: $(SRC_DIR)/matriz/matriz.c
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJ_DIR)/controller/controller.o: $(SRC_DIR)/controller/controller.c
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJ_DIR)/view/view.o: $(SRC_DIR)/view/view.c
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+# Executa o programa
+run: $(TARGET)
+	./$(TARGET)
 	
-run:
-	gcc obj/controller.o obj/matriz_handler.o -o bin/main
+# Limpa os arquivos gerados
 clean:
-	rm -rf bin obj
-	mkdir -p bin obj
+	rm -rf $(OBJ_DIR) $(BIN_DIR)
+
+# Declara alvos que não representam arquivos físicos
+.PHONY: all run clean

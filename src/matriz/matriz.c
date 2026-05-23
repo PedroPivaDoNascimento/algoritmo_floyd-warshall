@@ -28,22 +28,23 @@ Matriz* fill_matriz_from_file() {
     return matriz;
 }
 
-void print_matriz(Matriz* matriz) {
-    pritf("Matriz de dados de Entrada:\n");
-    for (int i = 0; i < matriz->size; i++) {
-        for (int j = 0; j < matriz->size; j++) {
-            printf("[%d]\t", matriz->data[i][j]);
+void create_warshall_matriz(Matriz* warshall) {
+    for (int k = 0; k < warshall->size; k++) {   
+        for (int i = 0; i < warshall->size; i++) {
+            for (int j = 0; j < warshall->size; j++) {
+                warshall->data[i][j] = ((warshall->data[i][j]) || (warshall->data[i][k] && warshall->data[k][j])); 
+            }
         }
-        printf("\n");
     }
 }
 
-Matriz* create_warshall_matriz(Matriz* original) {
-    Matriz* warshall = create_matriz(original->size);
-    for (int i = 0; i < original->size; i++) {   
-        for (int j = 0; j < original->size; j++) {
-            for (int k = 0; k < original->size; k++) {
-                
+void create_floyd_warshall_matriz(Matriz* floyd_warshall) {
+    for (int k = 0; k < floyd_warshall->size; k++) {   
+        for (int i = 0; i < floyd_warshall->size; i++) {
+            for (int j = 0; j < floyd_warshall->size; j++) {
+                if (floyd_warshall->data[i][k] + floyd_warshall->data[k][j] < floyd_warshall->data[i][j]){
+                    floyd_warshall->data[i][j] = floyd_warshall->data[i][k] + floyd_warshall->data[k][j];
+                }
             }
         }
     }

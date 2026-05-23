@@ -1,19 +1,45 @@
 #include "controller.h"
 #include "matriz_reader/matriz_reader.h"
-#include "matriz_handler/matriz_handler.h"
 #include "view/view.h"
-#include "matriz.h"
 #include <stdio.h>
 #include <stdlib.h>
 
-void run() {
+Matriz* read_matriz_entrada() {
     Matriz* matriz = create_matriz(0);
-    if (matriz == NULL) {
-        fprintf(stderr, "Não foi possível criar a matriz\n");
-        return;
-    }
-    print_matriz(matriz);
+    matriz = fill_matriz_from_file();
+    print_matriz_entrada(matriz);
+    return matriz;
+}
 
 
+void make_warshall_matriz(Matriz* matriz_entrada) {
+    Matriz* warshall = matriz_entrada;
+    create_warshall_matriz(warshall);
+    print_matriz_warshall(warshall);
+}
+
+
+void make_floyd_warshall_matriz(Matriz* matriz_entrada) {
+    Matriz* floyd_warshall = matriz_entrada;
+    create_floyd_warshall_matriz(floyd_warshall);
+    print_matriz_floyd_warshall(floyd_warshall);
+}
+
+
+void run(int choice) {
+    Matriz* matriz_entrada = read_matriz_entrada();
     
+
+    switch (choice) {
+        case 1:
+            make_warshall_matriz(matriz_entrada);
+            break;
+        case 2:
+            make_floyd_warshall_matriz(matriz_entrada);
+            break; 
+        default:
+            printf("Opção inválida\n");
+            break;
+    }
+   
 }
